@@ -1,0 +1,11 @@
+[Unit]
+Description=Ansible-pull user timer
+
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=5m
+RandomizedDelaySec=30
+Service=ansible-pull.service
+
+[Install]
+WantedBy=multi-user.target

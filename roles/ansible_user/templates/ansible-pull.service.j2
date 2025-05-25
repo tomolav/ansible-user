@@ -1,0 +1,10 @@
+[Unit]
+Description=Ansible-pull user service
+
+[Service]
+Type=simple
+ExecStart=ansible-pull -o -U https://github.com/tomolav/ansible-user.git install.yml 
+
+
+[Install]
+WantedBy=multi-user.target

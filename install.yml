@@ -1,0 +1,5 @@
+- name: Install
+  hosts: localhost
+
+  roles:
+    - ansible_user

@@ -1,0 +1,23 @@
+- name: Create systemd user directories
+  ansible.builtin.file:
+    path: '{{ ansible_user_dir }}/.config/systemd/user'
+    state: directory
+
+- name: Install ansible-pull user service
+  ansible.builtin.template:
+    src: ansible-pull.service.j2
+    dest: '{{ ansible_user_dir }}/.config/systemd/user/ansible-pull.service'
+  notify: Reload systemctl
+
+- name: Install ansible-pull user timer 
+  ansible.builtin.template:
+    src: ansible-pull.timer.j2
+    dest: '{{ ansible_user_dir }}/.config/systemd/user/ansible-pull.timer'
+  notify: Reload systemctl
+
+- name: Start ansible-pull.timer
+  ansible.builtin.systemd_service:
+    name: ansible-pull.timer
+    scope: user
+    state: started
+    enabled: true
