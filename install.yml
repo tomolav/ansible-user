@@ -3,3 +3,4 @@
 
   roles:
     - ansible_user
+    - ssh

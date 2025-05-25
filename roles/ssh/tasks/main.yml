@@ -1,0 +1,15 @@
+- name: Create ssh user directory
+  ansible.builtin.file:
+    path: '{{ ansible_user_dir }}/.ssh'
+    state: directory
+    mode: 0700
+      
+- name: Install ssh_config
+  ansible.builtin.copy:
+    content: |
+      Host *
+        HashKnownHosts no
+        ForwardAgent yes
+        StrictHostKeyChecking accept-new
+    dest: '{{ ansible_user_dir }}/.ssh/config'
+    mode: 0600
